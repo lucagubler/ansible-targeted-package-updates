@@ -83,7 +83,7 @@ Limit the run to a single host:
 ```bash
 uv run ansible-playbook playbooks/security_update.yml \
   --limit myserver.example.com \
-  --extra-vars "packages=['curl']"
+  --extra-vars '{"packages":["curl"]}'
 ```
 
 If `sudo` requires a password:
@@ -126,12 +126,12 @@ When a security advisory names affected packages:
 # 1. Test on one host
 uv run ansible-playbook playbooks/security_update.yml \
   --limit staging.example.com \
-  --extra-vars "packages=['curl']"
+  --extra-vars '{"packages":["curl"]}'
 
 # 2. Roll out to production hosts
 uv run ansible-playbook playbooks/security_update.yml \
   --limit webservers \
-  --extra-vars "packages=['curl']"
+  --extra-vars '{"packages":["curl"]}'
 ```
 
 ## License

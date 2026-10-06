@@ -1,8 +1,8 @@
 ---
 # Usage:
 # uv run ansible-playbook playbooks/security_update.yml --extra-vars "packages=['curl','openssl']"
-# uv run ansible-playbook playbooks/security_update.yml --limit example.host.com --extra-vars "packages=['curl']"
-# uv run ansible-playbook playbooks/security_update.yml --ask-become-pass --extra-vars "packages=['curl']"
+# uv run ansible-playbook playbooks/security_update.yml --limit example.host.com --extra-vars '{"packages":["curl"]}'
+# uv run ansible-playbook playbooks/security_update.yml --ask-become-pass --extra-vars '{"packages":["curl"]}'
 
 - name: Update specified packages if installed
   hosts: all
