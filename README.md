@@ -11,7 +11,7 @@ Use it when a CVE affects specific packages (for example `curl` or `openssl`) an
 - Updates only those installed packages to the latest available version via `apt`
 - Skips packages that are not installed on a host
 
-It does **not** install new packages or run a full system upgrade.
+It skips requested packages that are not already installed. Dependency changes may still occur. It does not request a full system upgrade.
 
 ## Prerequisites
 
