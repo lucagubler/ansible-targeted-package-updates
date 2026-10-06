@@ -1,0 +1,38 @@
+---
+# Usage:
+# uv run ansible-playbook playbooks/security_update.yml --extra-vars "packages=['curl','openssl']"
+# uv run ansible-playbook playbooks/security_update.yml --limit example.host.com --extra-vars "packages=['curl']"
+# uv run ansible-playbook playbooks/security_update.yml --ask-become-pass --extra-vars "packages=['curl']"
+
+- name: Update specified packages if installed
+  hosts: all
+  become: true
+  vars:
+    packages: []
+
+  tasks:
+    - name: Ensure at least one package is specified
+      ansible.builtin.assert:
+        that:
+          - packages | length > 0
+        fail_msg: >-
+          No packages specified. Pass packages via --extra-vars,
+          for example: --extra-vars "packages=['curl','openssl']"
+
+- name: Gather package facts
+  ansible.builtin.package_facts:
+    manager: apt
+
+- name: Update installed packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: true
+    cache_valid_time: 120
+  loop: "{{ packages }}"
+  when: ansible_facts.packages[item] is defined
+  register: result
+
+- name: Show result
+  ansible.builtin.debug:
+    var: result

@@ -1,0 +1,9 @@
+[project]
+name = "ansible-security-update"
+version = "0.1.0"
+description = "Targeted security package updates with Ansible"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "ansible>=10.0.0",
+]
